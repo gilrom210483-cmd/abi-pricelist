@@ -168,6 +168,21 @@
     gap: 8px;
     background: white;
   }
+  .btn-general {
+    background: white;
+    color: var(--purple);
+    border-color: var(--purple);
+  }
+  .btn-general:hover {
+    background: var(--purple);
+    color: white;
+  }
+  .btn-general.active {
+    background: linear-gradient(135deg, var(--purple), #7c3aed);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+  }
   .btn-promo {
     background: linear-gradient(135deg, #fff8e7, #fef0c7);
     color: #92400e;
@@ -495,6 +510,7 @@
     </div>
     <div class="action-btns">
       <button class="btn btn-print" onclick="window.print()">🖨️ הדפס / שמור PDF</button>
+      <button class="btn btn-general active" id="btnGeneral">📋 מחירון כללי</button>
       <button class="btn btn-promo" id="btnPromo">🎉 מבצעים עדכניים</button>
     </div>
   </div>
@@ -889,14 +905,20 @@
     });
   });
 
-  // Promo button
+  // מחירון כללי / מבצעים עדכניים toggle
+  const btnGeneral = document.getElementById('btnGeneral');
   const btnPromo = document.getElementById('btnPromo');
+
+  btnGeneral.addEventListener('click', () => {
+    document.body.classList.remove('promo-mode');
+    btnGeneral.classList.add('active');
+    btnPromo.classList.remove('active');
+  });
+
   btnPromo.addEventListener('click', () => {
-    document.body.classList.toggle('promo-mode');
-    btnPromo.classList.toggle('active');
-    btnPromo.textContent = document.body.classList.contains('promo-mode')
-      ? '✖️ חזרה לכל המוצרים'
-      : '🎉 מבצעים עדכניים';
+    document.body.classList.add('promo-mode');
+    btnPromo.classList.add('active');
+    btnGeneral.classList.remove('active');
   });
 
   // Search
