@@ -96,12 +96,17 @@
     margin-bottom: 18px;
     border: 1px solid rgba(212, 175, 55, 0.1);
   }
-  .controls-top {
+  .controls-row1 {
     display: flex;
     gap: 12px;
-    flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .controls-row2 {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
   }
   .search-input {
     flex: 1;
@@ -170,18 +175,19 @@
   }
   .btn-general {
     background: white;
-    color: var(--purple);
-    border-color: var(--purple);
+    color: var(--dark);
+    border-color: var(--border);
   }
   .btn-general:hover {
-    background: var(--purple);
+    background: var(--dark);
     color: white;
+    border-color: var(--dark);
   }
   .btn-general.active {
-    background: linear-gradient(135deg, var(--purple), #7c3aed);
+    background: linear-gradient(135deg, var(--pink), #be185d);
     color: white;
     border-color: transparent;
-    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+    box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
   }
   .btn-promo {
     background: linear-gradient(135deg, #fff8e7, #fef0c7);
@@ -501,15 +507,15 @@
 
   <!-- Controls -->
   <div class="controls no-print">
-    <div class="controls-top">
-      <input type="text" id="search" class="search-input" placeholder="🔍 חיפוש מוצר...">
+    <input type="text" id="search" class="search-input" placeholder="🔍 חיפוש מוצר..." style="margin-bottom:14px;">
+    <div class="controls-row1">
       <div class="vat-toggle">
         <button id="btnNoVat" class="active">לפני מע"מ</button>
         <button id="btnWithVat">כולל מע"מ</button>
       </div>
-    </div>
-    <div class="action-btns">
       <button class="btn btn-print" onclick="window.print()">🖨️ הדפס / שמור PDF</button>
+    </div>
+    <div class="controls-row2">
       <button class="btn btn-general active" id="btnGeneral">📋 מחירון כללי</button>
       <button class="btn btn-promo" id="btnPromo">🎉 מבצעים עדכניים</button>
     </div>
