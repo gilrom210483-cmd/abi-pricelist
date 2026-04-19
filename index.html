@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מחירון ABI 2026 | מוצרי טיפוח מקצועיים</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --pink: #ec4899;
+    --purple: #8b5cf6;
+    --gold: #d4af37;
+    --gold-light: #f4e5b8;
+    --dark: #1a1625;
+    --text: #2d2a3a;
+    --muted: #6b7280;
+    --bg: #faf7fb;
+    --card: #ffffff;
+    --border: #ece9f1;
+  }
+  body {
+    font-family: "Segoe UI", "Assistant", "Heebo", sans-serif;
+    background: linear-gradient(135deg, #faf7fb 0%, #f3e8ff 100%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 20px 15px;
+    line-height: 1.5;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding: 35px 25px;
+    background: linear-gradient(135deg, #ffffff 0%, #fdfbff 100%);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.08);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--pink), var(--purple), var(--gold));
+  }
+  header h1 {
+    font-size: 2.4rem;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+  header .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+  .gold-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gold);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .gold-line::before,
+  .gold-line::after {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .update-date {
+    display: inline-block;
+    background: rgba(26, 22, 37, 0.04);
+    color: var(--muted);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 14px;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  /* Controls bar */
+  .controls {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    margin-bottom: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  .controls-top {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .search-input {
+    flex: 1;
+    min-width: 220px;
+    padding: 13px 18px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    direction: rtl;
+    transition: all 0.2s;
+    background: #fafafa;
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--pink);
+    background: white;
+  }
+
+  /* VAT toggle */
+  .vat-toggle {
+    display: flex;
+    background: #f3f0f7;
+    border-radius: 12px;
+    padding: 4px;
+    gap: 2px;
+  }
+  .vat-toggle button {
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--muted);
+    border-radius: 9px;
+    font-family: inherit;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .vat-toggle button.active {
+    background: white;
+    color: var(--dark);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  /* Action buttons */
+  .action-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 11px 20px;
+    border: 2px solid;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.92rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+  }
+  .btn-promo {
+    background: linear-gradient(135deg, #fff8e7, #fef0c7);
+    color: #92400e;
+    border-color: var(--gold);
+  }
+  .btn-promo:hover {
+    background: linear-gradient(135deg, var(--gold), #c59a2f);
+    color: white;
+  }
+  .btn-promo.active {
+    background: linear-gradient(135deg, var(--gold), #c59a2f);
+    color: white;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  }
+  .btn-print {
+    background: white;
+    color: var(--dark);
+    border-color: var(--border);
+  }
+  .btn-print:hover {
+    background: var(--dark);
+    color: white;
+    border-color: var(--dark);
+  }
+
+  /* Category tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: thin;
+  }
+  .tab {
+    padding: 9px 18px;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: all 0.2s;
+    font-family: inherit;
+    color: var(--muted);
+  }
+  .tab:hover { border-color: var(--pink); color: var(--pink); }
+  .tab.active {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    border-color: transparent;
+  }
+
+  /* Promo mode indicator */
+  .promo-banner {
+    display: none;
+    background: linear-gradient(135deg, #fff8e7, #fef0c7);
+    border: 2px solid var(--gold);
+    border-radius: 14px;
+    padding: 15px 20px;
+    margin-bottom: 18px;
+    text-align: center;
+    color: #78350f;
+    font-weight: 600;
+  }
+  body.promo-mode .promo-banner { display: block; }
+
+  /* Category sections */
+  .category {
+    background: white;
+    border-radius: 20px;
+    padding: 26px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.08);
+  }
+  .category h2 {
+    font-size: 1.5rem;
+    color: var(--dark);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .category-divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--purple), var(--gold), transparent);
+    border-radius: 3px;
+    margin-bottom: 20px;
+    width: 80px;
+  }
+  .category h3 {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin: 22px 0 14px;
+    padding-right: 12px;
+    border-right: 3px solid var(--gold);
+    font-weight: 600;
+  }
+
+  /* Product grid */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    gap: 14px;
+  }
+  .product {
+    background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .product:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.1);
+    border-color: var(--pink);
+  }
+  .product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    min-height: 42px;
+  }
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .price-main {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--pink);
+    letter-spacing: -0.5px;
+  }
+  .price-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 500;
+    background: rgba(212, 175, 55, 0.12);
+    color: #78350f;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .no-price {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  /* Badges */
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 11px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: white;
+  }
+  .badge-winter { background: linear-gradient(135deg, #60a5fa, #a78bfa); }
+  .badge-promo { background: linear-gradient(135deg, var(--gold), #b8860b); }
+  .badge-gift { background: linear-gradient(135deg, #ec4899, #be185d); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a {
+    color: var(--pink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .footer-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--pink), var(--purple));
+    margin: 18px auto;
+    border-radius: 2px;
+  }
+
+  /* Hidden */
+  .hidden { display: none !important; }
+
+  /* Promo mode — show only products with badges */
+  body.promo-mode .product:not(.has-promo) { display: none !important; }
+  body.promo-mode .category:not(:has(.product.has-promo:not(.hidden))) { display: none !important; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    header h1 { font-size: 1.9rem; }
+    .products { grid-template-columns: 1fr; }
+    .category { padding: 20px 16px; }
+    .controls { padding: 14px; }
+    .vat-toggle button { padding: 9px 12px; font-size: 0.85rem; }
+    .btn { padding: 10px 14px; font-size: 0.85rem; }
+  }
+
+  /* PRINT STYLES */
+  @media print {
+    @page { margin: 1.5cm; size: A4; }
+    body {
+      background: white !important;
+      padding: 0;
+      font-size: 11pt;
+      color: black;
+    }
+    .controls, .tabs, footer .no-print, .btn, .promo-banner { display: none !important; }
+    header {
+      box-shadow: none !important;
+      padding: 10px 0 !important;
+      border-radius: 0 !important;
+      border: none !important;
+      border-bottom: 2px solid #333 !important;
+      margin-bottom: 15px !important;
+      background: white !important;
+    }
+    header::before { display: none !important; }
+    header h1 {
+      color: #1a1625 !important;
+      -webkit-text-fill-color: #1a1625 !important;
+      font-size: 22pt !important;
+    }
+    .gold-line { color: #666 !important; }
+    .update-date {
+      background: white !important;
+      border: 1px solid #ccc !important;
+    }
+    .category {
+      box-shadow: none !important;
+      border: none !important;
+      padding: 0 !important;
+      margin-bottom: 15px !important;
+      page-break-inside: avoid;
+      background: white !important;
+    }
+    .category h2 { font-size: 14pt !important; margin-bottom: 4px !important; }
+    .category h3 { font-size: 11pt !important; margin: 10px 0 6px !important; }
+    .category-divider { background: #333 !important; }
+    .products {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 6px !important;
+    }
+    .product {
+      background: white !important;
+      border: 1px solid #ddd !important;
+      padding: 8px !important;
+      page-break-inside: avoid;
+      min-height: unset !important;
+    }
+    .product:hover { transform: none !important; box-shadow: none !important; }
+    .product-name { font-size: 9.5pt !important; min-height: unset !important; margin-bottom: 4px !important; }
+    .price-main {
+      color: #1a1625 !important;
+      font-size: 13pt !important;
+    }
+    .price-label { font-size: 7pt !important; background: #f0f0f0 !important; color: #333 !important; }
+    .badge {
+      border: 1px solid #999 !important;
+      background: white !important;
+      color: #333 !important;
+      font-size: 7pt !important;
+    }
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px 0;
+      border-top: 1px solid #ccc;
+      font-size: 8.5pt !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>מחירון ABI 2026</h1>
+    <p class="subtitle">מוצרי טיפוח מקצועיים לציפורניים</p>
+    <div class="gold-line">מחירון צרכן רשמי</div>
+    <div><span class="update-date" id="updateDate">עודכן: 18.04.2026</span></div>
+  </header>
+
+  <!-- Controls -->
+  <div class="controls no-print">
+    <div class="controls-top">
+      <input type="text" id="search" class="search-input" placeholder="🔍 חיפוש מוצר...">
+      <div class="vat-toggle">
+        <button id="btnNoVat" class="active">לפני מע"מ</button>
+        <button id="btnWithVat">כולל מע"מ</button>
+      </div>
+    </div>
+    <div class="action-btns">
+      <button class="btn btn-promo" id="btnPromo">🎉 מבצעים עדכניים</button>
+      <button class="btn btn-print" onclick="window.print()">🖨️ הדפס / שמור PDF</button>
+    </div>
+  </div>
+
+  <div class="tabs no-print">
+    <button class="tab active" data-cat="all">הכל</button>
+    <button class="tab" data-cat="gello">🌸 ג'לו פרופשנל</button>
+    <button class="tab" data-cat="addict">✨ אדיקט</button>
+    <button class="tab" data-cat="layla">💎 לילה מילאנו</button>
+    <button class="tab" data-cat="electric">⚡ מכשירים חשמליים</button>
+    <button class="tab" data-cat="tools">🛠️ עזרים ושונות</button>
+  </div>
+
+  <div class="promo-banner">
+    🎉 מוצגים כעת רק מוצרים במבצע
+  </div>
+
+  <!-- CATEGORIES -->
+  <div id="categoriesContainer"></div>
+
+  <footer>
+    <div class="footer-divider"></div>
+    <p>📱 להזמנות וייעוץ: <a href="https://abi.co.il" target="_blank">abi.co.il</a></p>
+    <p class="no-print">📸 עקבו באינסטגרם: <a href="https://instagram.com/gello_layla_addict" target="_blank">@gello_layla_addict</a></p>
+    <p style="margin-top:15px; font-size:0.8rem; color:#9ca3af;">
+      המחירים הם מחירי צרכן. המחיר לפני מע"מ מתייחס למע"מ בשיעור 18%.<br>
+      מבצעים כפופים לתנאי ABI ולמלאי. לא כולל משלוח.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  // ====== LIVE DATA FROM GOOGLE SHEETS ======
+  const SHEET_ID = '13TwfgEK7mm4sGanRg9AK7enjMNOdZA1C';
+  const SHEET_NAME = 'מחירון 2026';
+
+  const CATEGORY_ICONS = {
+    "ג'לו פרופשנל":    '🌸',
+    'אדיקט':            '✨',
+    'לילה מילאנו':      '💎',
+    'מכשירים חשמליים': '⚡',
+    'עזרים ושונות':     '🛠️'
+  };
+  const CATEGORY_IDS = {
+    "ג'לו פרופשנל":    'gello',
+    'אדיקט':            'addict',
+    'לילה מילאנו':      'layla',
+    'מכשירים חשמליים': 'electric',
+    'עזרים ושונות':     'tools'
+  };
+
+  let CATEGORIES = [];
+
+  async function loadFromSheet() {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}&t=${Date.now()}`;
+    const res = await fetch(url);
+    const text = await res.text();
+    const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\);?\s*$/);
+    if (!match) throw new Error('Invalid gviz response');
+    const json = JSON.parse(match[1]);
+    const rows = json.table.rows || [];
+
+    const cats = new Map();
+    rows.forEach(row => {
+      const c = row.c || [];
+      const catName = (c[0] && c[0].v) ? String(c[0].v).trim() : '';
+      const subName = (c[1] && c[1].v) ? String(c[1].v).trim() : '';
+      const pName   = (c[2] && c[2].v) ? String(c[2].v).trim() : '';
+      if (!catName || !pName) return;
+
+      const pNoVat  = (c[3] && c[3].v != null) ? Number(c[3].v) : null;
+      const pYesVat = (c[4] && c[4].v != null) ? Number(c[4].v) : null;
+      const winter  = (c[5] && c[5].v) ? String(c[5].v).trim() : '';
+      const promo   = (c[6] && c[6].v) ? String(c[6].v).trim() : '';
+      const gift    = (c[7] && c[7].v) ? String(c[7].v).trim() : '';
+
+      if (!cats.has(catName)) {
+        cats.set(catName, {
+          id:   CATEGORY_IDS[catName] || catName.replace(/\s+/g, '-'),
+          icon: CATEGORY_ICONS[catName] || '📦',
+          name: catName,
+          groups: new Map()
+        });
+      }
+      const cat = cats.get(catName);
+      const groupKey = subName || '__default__';
+      if (!cat.groups.has(groupKey)) {
+        cat.groups.set(groupKey, { name: subName, products: [] });
+      }
+      cat.groups.get(groupKey).products.push({
+        name: pName,
+        price: pNoVat,
+        priceVat: pYesVat,
+        winter: winter === 'כן' || winter.toLowerCase() === 'yes' || winter.toLowerCase() === 'true',
+        promo: promo || null,
+        gift: gift || null
+      });
+    });
+
+    CATEGORIES = Array.from(cats.values()).map(c => ({
+      id: c.id, icon: c.icon, name: c.name,
+      groups: Array.from(c.groups.values())
+    }));
+  }
+
+  // Leave this declaration here so rest of file keeps working.
+  // Old hardcoded CATEGORIES removed — now loaded from sheet.
+  const _LEGACY_CATEGORIES_REMOVED = [
+    {
+      id: 'gello', icon: '🌸', name: "ג'לו פרופשנל",
+      groups: [
+        {
+          name: 'בייסים וטופים',
+          products: [
+            { name: 'פריימר',                   price: 25.3, priceVat: 29.9, winter: true },
+            { name: 'בסיס אנטומי',               price: 38.1, priceVat: 44.9, winter: true },
+            { name: 'בייסים וטופים — כל הסוגים',  price: 50.8, priceVat: 59.9, winter: true },
+            { name: 'בייס/טופ מילוי — 30 מ"ל',   price: 67.7, priceVat: 79.9, winter: true },
+            { name: 'בייס/טופ מילוי — 50 מ"ל',   price: 33.1, priceVat: 39 },
+            { name: 'קאבר בייס — בקבוק',          price: 58.5, priceVat: 69 },
+            { name: 'קאבר בייס — צנצנת',          price: 38.1, priceVat: 44.9 },
+          ]
+        },
+        {
+          name: 'צבעים וליינרים',
+          products: [
+            { name: 'צבעים',                  price: 25.3, priceVat: 29.9 },
+            { name: 'צבעים — מיניז',          price: 12.6, priceVat: 14.9 },
+            { name: 'ליינר ג\'ל',             price: 126.3, priceVat: 149 },
+            { name: "לק רגיל תואם ג'ל",       price: 41.5, priceVat: 49 },
+          ]
+        },
+        {
+          name: 'מארזים ומזוודות',
+          products: [
+            { name: "מארז פרנצ' F8-F12", price: 66.9, priceVat: 79 },
+            { name: "מארז 4 ג'ל + 4 לק",  price: 101.7, priceVat: 120 },
+            { name: 'מזוודה הפי בוקס',      price: 100, priceVat: 118 },
+          ]
+        },
+        {
+          name: 'חומרי בניית ציפורניים',
+          products: [
+            { name: "בילדר בייס (ג'ל בניה בבקבוק)", price: 75.4, priceVat: 89 },
+            { name: "ג'ל בניה — 15 גרם",              price: 41.5, priceVat: 49 },
+            { name: "ג'ל בניה — 30 גרם",              price: 41.5, priceVat: 49 },
+            { name: "ג'ל בניה — 50 גרם",              price: 41.5, priceVat: 49 },
+            { name: "פוליג'ל — 30 גרם",               price: 41.5, priceVat: 49 },
+            { name: "פוליג'ל — 60 גרם",               price: 66.9, priceVat: 79 },
+            { name: "פוליג'ל ללא נטרול בצנצנת",       price: 41.5, priceVat: 49 },
+            { name: "נוזל לפוליג'ל",                  price: 83.9, priceVat: 99 },
+            { name: "טיפס הפוך",                      price: 126.3, priceVat: 149 },
+            { name: "ג'לי טיפס",                      price: null, priceVat: null },
+          ]
+        }
+      ]
+    },
+    {
+      id: 'addict', icon: '✨', name: 'אדיקט',
+      groups: [
+        {
+          name: 'בייסים וטופים',
+          products: [
+            { name: 'אדיקט',                   price: 29.7, priceVat: 35, winter: true, promo: '3 ב-99₪' },
+            { name: 'אולטרבונד',               price: 29.7, priceVat: 35, promo: '3 ב-99₪' },
+            { name: 'בייסים וטופים',           price: 16.9, priceVat: 19.9, winter: true, promo: '3 ב-99₪' },
+            { name: 'קולור בייס — בקבוק',      price: 41.5, priceVat: 49, winter: true },
+            { name: 'קולור בייס — סקוויז',     price: 83.9, priceVat: 99 },
+            { name: 'מארז 4 יח\' קולור בייס',  price: 29.7, priceVat: 35 },
+            { name: 'צבעים',                   price: 41.5, priceVat: 49 },
+          ]
+        },
+        {
+          name: 'מוצרי בניית ציפורניים',
+          products: [
+            { name: 'בילד איט אפ — בקבוק',        price: 83.9, priceVat: 99 },
+            { name: "ג'ל בניה סקוויז",            price: 58.5, priceVat: 69 },
+            { name: "ג'ל בניה מוצק (לא מתחמם)", price: 58.5, priceVat: 69 },
+            { name: "פוליג'ל היפואלרגני בצנצנת", price: 41.5, priceVat: 49 },
+            { name: "פוליג'ל טיובה — 30 גרם",     price: 75.4, priceVat: 89 },
+            { name: "פוליג'ל טיובה — 60 גרם",     price: 41.5, priceVat: 49 },
+          ]
+        },
+        {
+          name: 'מוצרי מניקור',
+          products: [
+            { name: 'דוחף עור לולאה',             price: 58.5, priceVat: 69 },
+            { name: 'מספריים קטיקולה קצה מעוגל', price: 25.3, priceVat: 29.9 },
+            { name: 'מארז מיני באפר — 50 יח\'',  price: null, priceVat: null },
+          ]
+        }
+      ]
+    },
+    {
+      id: 'layla', icon: '💎', name: 'לילה מילאנו',
+      groups: [
+        {
+          name: 'בייסים וטופים',
+          products: [
+            { name: 'פריימר',                       price: 41.5, priceVat: 49 },
+            { name: 'בייסים וטופים',                 price: 41.5, priceVat: 49 },
+            { name: 'בייסים וטופים — בקבוק מוגדל',  price: 58.5, priceVat: 69 },
+          ]
+        },
+        {
+          name: 'צבעים וליינרים',
+          products: [
+            { name: 'צבעים',                  price: 41.5, priceVat: 49 },
+            { name: 'צבעים — בקבוק מוגדל',    price: 58.5, priceVat: 69 },
+            { name: 'ליינר',                  price: 50.0, priceVat: 69 },
+          ]
+        },
+        {
+          name: 'מניקור ועזרים',
+          products: [
+            { name: 'מרכך קטיקולה — בקבוק',    price: 12.6, priceVat: 14.9, winter: true },
+            { name: 'מרכך קטיקולה — מילוי',    price: 41.5, priceVat: 49 },
+            { name: 'דוחפי עור — כל הסוגים',   price: 58.5, priceVat: 69 },
+            { name: 'צבתיות — כל הסוגים',       price: 75.4, priceVat: 89 },
+            { name: 'ראש שיוף יהלום',          price: 14.3, priceVat: 16.9 },
+            { name: 'ראש שיוף קרמי/קרבייד',    price: 41.5, priceVat: 49 },
+            { name: 'סט ראשי שיוף',             price: 83.9, priceVat: 99 },
+            { name: "פצירת עץ 180/100 — 10 יח'",  price: 24.6, priceVat: 29 },
+            { name: "פצירה איכותית 100/150 — 10 יח'",  price: 33.1, priceVat: 39 },
+            { name: "באפר ארוך 100/150 — 10 יח'",  price: 41.5, priceVat: 49 },
+          ]
+        }
+      ]
+    },
+    {
+      id: 'electric', icon: '⚡', name: 'מכשירים חשמליים',
+      groups: [
+        {
+          name: '',
+          products: [
+            { name: 'מנורה ורודה לילה מילאנו',    price: 253.4, priceVat: 299, winter: true },
+            { name: 'תחת עבודה אדיקט מבית סאן',   price: 253.4, priceVat: 299, gift: '3 ג\'ל מתנה' },
+            { name: 'מנורת איגלו',                 price: 422.9, priceVat: 499 },
+            { name: 'מנורת סנואו-וויט חשמלי',      price: 799.2, priceVat: 943 },
+            { name: 'מנורת סנואו-וויט נטענת',      price: 989.8, priceVat: 1168 },
+            { name: 'מכונת שיוף קוברה',            price: 592.4, priceVat: 699 },
+            { name: 'מכונת שיוף נינג\'ה',          price: 719.5, priceVat: 849 },
+            { name: 'שואב שולחני בלאק הול',        price: 507.6, priceVat: 599 },
+            { name: 'מנורת פנס עם חיישן ומעמד',   price: 109.3, priceVat: 129 },
+            { name: 'רינג צילום קטן שולחני',       price: 58.5, priceVat: 69 },
+          ]
+        }
+      ]
+    },
+    {
+      id: 'tools', icon: '🛠️', name: 'עזרים ושונות',
+      groups: [
+        {
+          name: '',
+          products: [
+            { name: 'עט שמן — תות/דובדבן/אלוורה', price: null, priceVat: null },
+            { name: 'דוחף עור מקצועי',             price: null, priceVat: null },
+            { name: 'מספריים לקטיקולה',            price: null, priceVat: null },
+            { name: 'כרית מרפק',                   price: null, priceVat: null },
+            { name: 'כרית אורטופדית L',            price: null, priceVat: null },
+            { name: 'כרית אורטופדית XL',           price: null, priceVat: null },
+          ]
+        }
+      ]
+    }
+  ];
+
+  // Render
+  function renderCategories() {
+    const container = document.getElementById('categoriesContainer');
+    container.innerHTML = '';
+    CATEGORIES.forEach(cat => {
+      const section = document.createElement('section');
+      section.className = 'category';
+      section.dataset.cat = cat.id;
+      section.innerHTML = `<h2>${cat.icon} ${cat.name}</h2><div class="category-divider"></div>`;
+
+      cat.groups.forEach(group => {
+        if (group.name) {
+          const h3 = document.createElement('h3');
+          h3.textContent = group.name;
+          section.appendChild(h3);
+        }
+        const grid = document.createElement('div');
+        grid.className = 'products';
+
+        group.products.forEach(p => {
+          const hasPromo = p.winter || p.promo || p.gift;
+          const card = document.createElement('div');
+          card.className = 'product' + (hasPromo ? ' has-promo' : '');
+          card.dataset.name = p.name;
+
+          let priceHtml;
+          if (p.price === null) {
+            priceHtml = '<div class="price-row"><span class="no-price">פנה אלינו</span></div>';
+          } else {
+            priceHtml = `
+              <div class="price-row">
+                <span class="price-main" data-price="${p.price}" data-price-vat="${p.priceVat}">₪${p.price}</span>
+                <span class="price-label" data-label-no-vat="לפני מע&quot;מ" data-label-with-vat="כולל מע&quot;מ">לפני מע"מ</span>
+              </div>`;
+          }
+
+          const badges = [];
+          if (p.winter) badges.push('<span class="badge badge-winter">❄️ מבצע חורף</span>');
+          if (p.promo) badges.push(`<span class="badge badge-promo">🔥 ${p.promo}</span>`);
+          if (p.gift) badges.push(`<span class="badge badge-gift">🎁 ${p.gift}</span>`);
+
+          card.innerHTML = `
+            <div class="product-name">${p.name}</div>
+            ${priceHtml}
+            ${badges.length ? '<div class="badges">' + badges.join('') + '</div>' : ''}
+          `;
+          grid.appendChild(card);
+        });
+        section.appendChild(grid);
+      });
+      container.appendChild(section);
+    });
+  }
+
+  // Show loading state, then fetch sheet data and render
+  const loadingContainer = document.getElementById('categoriesContainer');
+  loadingContainer.innerHTML = '<div style="text-align:center;padding:60px 20px;color:#6b7280;font-size:1.1rem;">⏳ טוען מחירון מהגיליון...</div>';
+
+  (async () => {
+    try {
+      await loadFromSheet();
+      renderCategories();
+      applyVatMode();
+      // Update timestamp to now
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('updateDate').textContent =
+        `עודכן: ${pad(now.getDate())}.${pad(now.getMonth()+1)}.${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    } catch (err) {
+      console.error(err);
+      loadingContainer.innerHTML = `
+        <div style="text-align:center;padding:60px 20px;color:#dc2626;background:#fef2f2;border-radius:14px;">
+          ❌ לא הצלחתי לטעון את המחירון מהגיליון.<br>
+          <small style="color:#6b7280;">בדוק שהגיליון משותף ציבורית ונסה לרענן.</small>
+        </div>`;
+    }
+  })();
+
+  // VAT toggle
+  const btnNoVat = document.getElementById('btnNoVat');
+  const btnWithVat = document.getElementById('btnWithVat');
+  let vatMode = 'no'; // 'no' or 'with'
+
+  function applyVatMode() {
+    document.querySelectorAll('.price-main').forEach(el => {
+      const p = el.dataset.price;
+      const pv = el.dataset.priceVat;
+      el.textContent = '₪' + (vatMode === 'with' ? pv : p);
+    });
+    document.querySelectorAll('.price-label').forEach(el => {
+      el.textContent = vatMode === 'with' ? el.dataset.labelWithVat : el.dataset.labelNoVat;
+    });
+    btnNoVat.classList.toggle('active', vatMode === 'no');
+    btnWithVat.classList.toggle('active', vatMode === 'with');
+  }
+  btnNoVat.onclick = () => { vatMode = 'no'; applyVatMode(); };
+  btnWithVat.onclick = () => { vatMode = 'with'; applyVatMode(); };
+
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      document.querySelectorAll('.category').forEach(c => {
+        c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat);
+      });
+    });
+  });
+
+  // Promo button
+  const btnPromo = document.getElementById('btnPromo');
+  btnPromo.addEventListener('click', () => {
+    document.body.classList.toggle('promo-mode');
+    btnPromo.classList.toggle('active');
+    btnPromo.textContent = document.body.classList.contains('promo-mode')
+      ? '✖️ חזרה לכל המוצרים'
+      : '🎉 מבצעים עדכניים';
+  });
+
+  // Search
+  document.getElementById('search').addEventListener('input', (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    document.querySelectorAll('.product').forEach(p => {
+      const match = !q || p.dataset.name.toLowerCase().includes(q);
+      p.classList.toggle('hidden', !match);
+    });
+  });
+</script>
+
+</body>
+</html>
