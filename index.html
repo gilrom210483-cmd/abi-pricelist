@@ -7,20 +7,20 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --pink: #f472b6;
-    --purple: #a78bfa;
-    --gold: #f0c040;
-    --gold-light: #3a2e10;
-    --dark: #f0ebf8;
-    --text: #e8e0f5;
-    --muted: #9d8fc0;
-    --bg: #0f0a1a;
-    --card: #1e1530;
-    --border: #3a2d55;
+    --pink: #ec4899;
+    --purple: #8b5cf6;
+    --gold: #d4af37;
+    --gold-light: #f4e5b8;
+    --dark: #1a1625;
+    --text: #2d2a3a;
+    --muted: #6b7280;
+    --bg: #faf7fb;
+    --card: #ffffff;
+    --border: #ece9f1;
   }
   body {
     font-family: "Segoe UI", "Assistant", "Heebo", sans-serif;
-    background: linear-gradient(135deg, #0f0a1a 0%, #1a0f2e 100%);
+    background: linear-gradient(135deg, #faf7fb 0%, #f3e8ff 100%);
     color: var(--text);
     min-height: 100vh;
     padding: 20px 15px;
@@ -32,13 +32,13 @@
   header {
     text-align: center;
     padding: 35px 25px;
-    background: linear-gradient(135deg, #1e1530 0%, #2a1a45 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fdfbff 100%);
     border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(167, 139, 250, 0.15);
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.08);
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(240, 192, 64, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.15);
   }
   header::before {
     content: '';
@@ -89,12 +89,12 @@
 
   /* Controls bar */
   .controls {
-    background: #1e1530;
+    background: white;
     border-radius: 18px;
     padding: 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
     margin-bottom: 18px;
-    border: 1px solid rgba(240, 192, 64, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.1);
   }
   .controls-row1 {
     display: flex;
@@ -103,10 +103,15 @@
     margin-bottom: 12px;
     flex-wrap: nowrap;
   }
+  .controls-row1 .vat-toggle { flex: 1; }
+  .controls-row1 .btn-print { flex-shrink: 0; }
   .controls-row2 {
     display: flex;
     gap: 10px;
-    justify-content: flex-start;
+  }
+  .controls-row2 .btn {
+    flex: 1;
+    justify-content: center;
   }
   .search-input {
     flex: 1;
@@ -118,20 +123,18 @@
     font-family: inherit;
     direction: rtl;
     transition: all 0.2s;
-    background: #150f26;
-    color: var(--text);
+    background: #fafafa;
   }
-  .search-input::placeholder { color: var(--muted); }
   .search-input:focus {
     outline: none;
     border-color: var(--pink);
-    background: #1a1235;
+    background: white;
   }
 
   /* VAT toggle */
   .vat-toggle {
     display: flex;
-    background: #150f26;
+    background: #f3f0f7;
     border-radius: 12px;
     padding: 4px;
     gap: 2px;
@@ -150,9 +153,9 @@
     white-space: nowrap;
   }
   .vat-toggle button.active {
-    background: rgba(244, 114, 182, 0.2);
-    color: var(--pink);
-    box-shadow: 0 2px 8px rgba(244, 114, 182, 0.2);
+    background: white;
+    color: var(--dark);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
 
   /* Action buttons */
@@ -173,50 +176,54 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #150f26;
+    background: white;
   }
   .btn-general {
-    background: rgba(244, 114, 182, 0.1);
-    color: var(--pink);
-    border-color: rgba(244, 114, 182, 0.35);
-    backdrop-filter: blur(6px);
+    background: white;
+    color: var(--dark);
+    border-color: var(--border);
   }
   .btn-general:hover {
-    background: rgba(244, 114, 182, 0.22);
-    border-color: var(--pink);
+    background: var(--dark);
+    color: white;
+    border-color: var(--dark);
   }
   .btn-general.active {
-    background: rgba(244, 114, 182, 0.25);
-    color: var(--pink);
-    border-color: var(--pink);
-    box-shadow: 0 4px 14px rgba(244, 114, 182, 0.25);
+    background: linear-gradient(135deg, var(--pink), #be185d);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
   }
   .btn-promo {
-    background: rgba(240, 192, 64, 0.1);
-    color: var(--gold);
-    border-color: rgba(240, 192, 64, 0.35);
-    backdrop-filter: blur(6px);
+    background: linear-gradient(135deg, #fff8e7, #fef0c7);
+    color: #92400e;
+    border-color: var(--gold);
   }
   .btn-promo:hover {
-    background: rgba(240, 192, 64, 0.22);
-    border-color: var(--gold);
+    background: linear-gradient(135deg, var(--gold), #c59a2f);
+    color: white;
   }
   .btn-promo.active {
-    background: rgba(240, 192, 64, 0.25);
-    color: var(--gold);
-    border-color: var(--gold);
-    box-shadow: 0 4px 14px rgba(240, 192, 64, 0.25);
+    background: linear-gradient(135deg, var(--gold), #c59a2f);
+    color: white;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
   }
   .btn-print {
-    background: rgba(167, 139, 250, 0.1);
-    color: var(--purple);
-    border-color: rgba(167, 139, 250, 0.35);
-    backdrop-filter: blur(6px);
+    background: white;
+    color: var(--dark);
+    border-color: var(--border);
     white-space: nowrap;
+    flex-shrink: 0;
+    padding: 10px 14px;
   }
   .btn-print:hover {
-    background: rgba(167, 139, 250, 0.22);
-    border-color: var(--purple);
+    background: var(--dark);
+    color: white;
+    border-color: var(--dark);
+  }
+  @media (max-width: 640px) {
+    .btn-print .print-text { display: none; }
+    .controls { padding: 14px 12px; }
   }
 
   /* Category tabs */
@@ -229,7 +236,7 @@
   }
   .tab {
     padding: 9px 18px;
-    background: #1e1530;
+    background: white;
     border: 2px solid var(--border);
     border-radius: 20px;
     cursor: pointer;
@@ -263,12 +270,12 @@
 
   /* Category sections */
   .category {
-    background: #1e1530;
+    background: white;
     border-radius: 20px;
     padding: 26px;
     margin-bottom: 22px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    border: 1px solid rgba(240, 192, 64, 0.12);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.08);
   }
   .category h2 {
     font-size: 1.5rem;
@@ -319,7 +326,7 @@
   }
   .group-body.open { display: grid; }
   .product {
-    background: linear-gradient(135deg, #150f26 0%, #1a1235 100%);
+    background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 16px;
@@ -518,7 +525,7 @@
         <button id="btnNoVat" class="active">לפני מע"מ</button>
         <button id="btnWithVat">כולל מע"מ</button>
       </div>
-      <button class="btn btn-print" onclick="window.print()">🖨️ הדפס / שמור PDF</button>
+      <button class="btn btn-print" onclick="window.print()">🖨️ <span class="print-text">הדפס</span></button>
     </div>
     <div class="controls-row2">
       <button class="btn btn-general active" id="btnGeneral">📋 מחירון כללי</button>
