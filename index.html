@@ -261,12 +261,23 @@
   }
   .category h3 {
     font-size: 1.05rem;
-    color: var(--muted);
-    margin: 22px 0 14px;
-    padding-right: 12px;
+    color: var(--purple);
+    margin: 10px 0 0;
+    padding: 12px 14px 12px 12px;
     border-right: 3px solid var(--gold);
     font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    user-select: none;
+    background: rgba(139,92,246,0.04);
+    transition: background 0.2s;
   }
+  .category h3:hover { background: rgba(139,92,246,0.1); }
+  .category h3 .arrow { font-size: 0.8rem; transition: transform 0.25s; color: var(--gold); }
+  .category h3.open .arrow { transform: rotate(180deg); }
 
   /* Product grid */
   .products {
@@ -274,6 +285,13 @@
     grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
     gap: 14px;
   }
+  .group-body {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    gap: 14px;
+    padding: 14px 0 6px;
+  }
+  .group-body.open { display: grid; }
   .product {
     background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
     border: 1px solid var(--border);
@@ -417,7 +435,9 @@
       background: white !important;
     }
     .category h2 { font-size: 14pt !important; margin-bottom: 4px !important; }
-    .category h3 { font-size: 11pt !important; margin: 10px 0 6px !important; }
+    .category h3 { font-size: 11pt !important; margin: 10px 0 6px !important; cursor: default; background: none !important; }
+    .category h3 .arrow { display: none !important; }
+    .group-body { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
     .category-divider { background: #333 !important; }
     .products {
       display: grid !important;
@@ -474,7 +494,7 @@
       </div>
     </div>
     <div class="action-btns">
-      <button class="btn btn-promo" id="btnPromo">🎉 מבצעים עדכניים</button>
+      <button class="btn btn-promo" id="btnPromo">📋 מחירון כללי</button>
       <button class="btn btn-print" onclick="window.print()">🖨️ הדפס / שמור PDF</button>
     </div>
   </div>
@@ -743,6 +763,37 @@
     }
   ];
 
+  // Build a single product card
+  function buildCard(p) {
+    const hasPromo = p.winter || p.promo || p.gift;
+    const card = document.createElement('div');
+    card.className = 'product' + (hasPromo ? ' has-promo' : '');
+    card.dataset.name = p.name;
+
+    let priceHtml;
+    if (p.price === null) {
+      priceHtml = '<div class="price-row"><span class="no-price">פנה אלינו</span></div>';
+    } else {
+      priceHtml = `
+        <div class="price-row">
+          <span class="price-main" data-price="${p.price}" data-price-vat="${p.priceVat}">₪${p.price}</span>
+          <span class="price-label" data-label-no-vat="לפני מע&quot;מ" data-label-with-vat="כולל מע&quot;מ">לפני מע"מ</span>
+        </div>`;
+    }
+
+    const badges = [];
+    if (p.winter) badges.push('<span class="badge badge-winter">❄️ מבצע חורף</span>');
+    if (p.promo) badges.push(`<span class="badge badge-promo">🔥 ${p.promo}</span>`);
+    if (p.gift) badges.push(`<span class="badge badge-gift">🎁 ${p.gift}</span>`);
+
+    card.innerHTML = `
+      <div class="product-name">${p.name}</div>
+      ${priceHtml}
+      ${badges.length ? '<div class="badges">' + badges.join('') + '</div>' : ''}
+    `;
+    return card;
+  }
+
   // Render
   function renderCategories() {
     const container = document.getElementById('categoriesContainer');
@@ -755,43 +806,27 @@
 
       cat.groups.forEach(group => {
         if (group.name) {
+          // Accordion group — starts collapsed
           const h3 = document.createElement('h3');
-          h3.textContent = group.name;
+          h3.innerHTML = `<span>${group.name}</span><span class="arrow">▼</span>`;
           section.appendChild(h3);
+
+          const body = document.createElement('div');
+          body.className = 'group-body';
+          group.products.forEach(p => body.appendChild(buildCard(p)));
+          section.appendChild(body);
+
+          h3.addEventListener('click', () => {
+            body.classList.toggle('open');
+            h3.classList.toggle('open');
+          });
+        } else {
+          // No group name — always open
+          const grid = document.createElement('div');
+          grid.className = 'products';
+          group.products.forEach(p => grid.appendChild(buildCard(p)));
+          section.appendChild(grid);
         }
-        const grid = document.createElement('div');
-        grid.className = 'products';
-
-        group.products.forEach(p => {
-          const hasPromo = p.winter || p.promo || p.gift;
-          const card = document.createElement('div');
-          card.className = 'product' + (hasPromo ? ' has-promo' : '');
-          card.dataset.name = p.name;
-
-          let priceHtml;
-          if (p.price === null) {
-            priceHtml = '<div class="price-row"><span class="no-price">פנה אלינו</span></div>';
-          } else {
-            priceHtml = `
-              <div class="price-row">
-                <span class="price-main" data-price="${p.price}" data-price-vat="${p.priceVat}">₪${p.price}</span>
-                <span class="price-label" data-label-no-vat="לפני מע&quot;מ" data-label-with-vat="כולל מע&quot;מ">לפני מע"מ</span>
-              </div>`;
-          }
-
-          const badges = [];
-          if (p.winter) badges.push('<span class="badge badge-winter">❄️ מבצע חורף</span>');
-          if (p.promo) badges.push(`<span class="badge badge-promo">🔥 ${p.promo}</span>`);
-          if (p.gift) badges.push(`<span class="badge badge-gift">🎁 ${p.gift}</span>`);
-
-          card.innerHTML = `
-            <div class="product-name">${p.name}</div>
-            ${priceHtml}
-            ${badges.length ? '<div class="badges">' + badges.join('') + '</div>' : ''}
-          `;
-          grid.appendChild(card);
-        });
-        section.appendChild(grid);
       });
       container.appendChild(section);
     });
@@ -861,7 +896,7 @@
     btnPromo.classList.toggle('active');
     btnPromo.textContent = document.body.classList.contains('promo-mode')
       ? '✖️ חזרה לכל המוצרים'
-      : '🎉 מבצעים עדכניים';
+      : '📋 מחירון כללי';
   });
 
   // Search
