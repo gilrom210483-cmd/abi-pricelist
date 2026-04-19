@@ -7,20 +7,20 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --pink: #ec4899;
-    --purple: #8b5cf6;
-    --gold: #d4af37;
-    --gold-light: #f4e5b8;
-    --dark: #1a1625;
-    --text: #2d2a3a;
-    --muted: #6b7280;
-    --bg: #faf7fb;
-    --card: #ffffff;
-    --border: #ece9f1;
+    --pink: #f472b6;
+    --purple: #a78bfa;
+    --gold: #f0c040;
+    --gold-light: #3a2e10;
+    --dark: #f0ebf8;
+    --text: #e8e0f5;
+    --muted: #9d8fc0;
+    --bg: #0f0a1a;
+    --card: #1e1530;
+    --border: #3a2d55;
   }
   body {
     font-family: "Segoe UI", "Assistant", "Heebo", sans-serif;
-    background: linear-gradient(135deg, #faf7fb 0%, #f3e8ff 100%);
+    background: linear-gradient(135deg, #0f0a1a 0%, #1a0f2e 100%);
     color: var(--text);
     min-height: 100vh;
     padding: 20px 15px;
@@ -32,13 +32,13 @@
   header {
     text-align: center;
     padding: 35px 25px;
-    background: linear-gradient(135deg, #ffffff 0%, #fdfbff 100%);
+    background: linear-gradient(135deg, #1e1530 0%, #2a1a45 100%);
     border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.08);
+    box-shadow: 0 8px 32px rgba(167, 139, 250, 0.15);
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(240, 192, 64, 0.2);
   }
   header::before {
     content: '';
@@ -89,19 +89,19 @@
 
   /* Controls bar */
   .controls {
-    background: white;
+    background: #1e1530;
     border-radius: 18px;
     padding: 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     margin-bottom: 18px;
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(240, 192, 64, 0.15);
   }
   .controls-row1 {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
     margin-bottom: 12px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
   .controls-row2 {
     display: flex;
@@ -118,29 +118,31 @@
     font-family: inherit;
     direction: rtl;
     transition: all 0.2s;
-    background: #fafafa;
+    background: #150f26;
+    color: var(--text);
   }
+  .search-input::placeholder { color: var(--muted); }
   .search-input:focus {
     outline: none;
     border-color: var(--pink);
-    background: white;
+    background: #1a1235;
   }
 
   /* VAT toggle */
   .vat-toggle {
     display: flex;
-    background: #f3f0f7;
+    background: #150f26;
     border-radius: 12px;
     padding: 4px;
     gap: 2px;
   }
   .vat-toggle button {
-    padding: 10px 16px;
+    padding: 9px 12px;
     border: none;
     background: transparent;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--muted);
     border-radius: 9px;
     font-family: inherit;
@@ -148,9 +150,9 @@
     white-space: nowrap;
   }
   .vat-toggle button.active {
-    background: white;
-    color: var(--dark);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: rgba(244, 114, 182, 0.2);
+    color: var(--pink);
+    box-shadow: 0 2px 8px rgba(244, 114, 182, 0.2);
   }
 
   /* Action buttons */
@@ -171,47 +173,50 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: white;
+    background: #150f26;
   }
   .btn-general {
-    background: white;
-    color: var(--dark);
-    border-color: var(--border);
+    background: rgba(244, 114, 182, 0.1);
+    color: var(--pink);
+    border-color: rgba(244, 114, 182, 0.35);
+    backdrop-filter: blur(6px);
   }
   .btn-general:hover {
-    background: var(--dark);
-    color: white;
-    border-color: var(--dark);
+    background: rgba(244, 114, 182, 0.22);
+    border-color: var(--pink);
   }
   .btn-general.active {
-    background: linear-gradient(135deg, var(--pink), #be185d);
-    color: white;
-    border-color: transparent;
-    box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
+    background: rgba(244, 114, 182, 0.25);
+    color: var(--pink);
+    border-color: var(--pink);
+    box-shadow: 0 4px 14px rgba(244, 114, 182, 0.25);
   }
   .btn-promo {
-    background: linear-gradient(135deg, #fff8e7, #fef0c7);
-    color: #92400e;
-    border-color: var(--gold);
+    background: rgba(240, 192, 64, 0.1);
+    color: var(--gold);
+    border-color: rgba(240, 192, 64, 0.35);
+    backdrop-filter: blur(6px);
   }
   .btn-promo:hover {
-    background: linear-gradient(135deg, var(--gold), #c59a2f);
-    color: white;
+    background: rgba(240, 192, 64, 0.22);
+    border-color: var(--gold);
   }
   .btn-promo.active {
-    background: linear-gradient(135deg, var(--gold), #c59a2f);
-    color: white;
-    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+    background: rgba(240, 192, 64, 0.25);
+    color: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 4px 14px rgba(240, 192, 64, 0.25);
   }
   .btn-print {
-    background: white;
-    color: var(--dark);
-    border-color: var(--border);
+    background: rgba(167, 139, 250, 0.1);
+    color: var(--purple);
+    border-color: rgba(167, 139, 250, 0.35);
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
   }
   .btn-print:hover {
-    background: var(--dark);
-    color: white;
-    border-color: var(--dark);
+    background: rgba(167, 139, 250, 0.22);
+    border-color: var(--purple);
   }
 
   /* Category tabs */
@@ -224,7 +229,7 @@
   }
   .tab {
     padding: 9px 18px;
-    background: white;
+    background: #1e1530;
     border: 2px solid var(--border);
     border-radius: 20px;
     cursor: pointer;
@@ -258,12 +263,12 @@
 
   /* Category sections */
   .category {
-    background: white;
+    background: #1e1530;
     border-radius: 20px;
     padding: 26px;
     margin-bottom: 22px;
-    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.05);
-    border: 1px solid rgba(212, 175, 55, 0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border: 1px solid rgba(240, 192, 64, 0.12);
   }
   .category h2 {
     font-size: 1.5rem;
@@ -314,7 +319,7 @@
   }
   .group-body.open { display: grid; }
   .product {
-    background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #150f26 0%, #1a1235 100%);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 16px;
