@@ -31,7 +31,7 @@
   /* Header */
   header {
     text-align: center;
-    padding: 35px 25px;
+    padding: 22px 20px 18px;
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -114,8 +114,8 @@
     justify-content: center;
   }
   .search-input {
-    flex: 1;
-    min-width: 220px;
+    display: block;
+    width: 100%;
     padding: 13px 18px;
     border: 2px solid var(--border);
     border-radius: 12px;
@@ -124,6 +124,7 @@
     direction: rtl;
     transition: all 0.2s;
     background: #fafafa;
+    box-sizing: border-box;
   }
   .search-input:focus {
     outline: none;
@@ -140,14 +141,14 @@
     gap: 2px;
   }
   .vat-toggle button {
-    padding: 9px 12px;
+    padding: 7px 10px;
     border: none;
     background: transparent;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--muted);
-    border-radius: 9px;
+    border-radius: 8px;
     font-family: inherit;
     transition: all 0.2s;
     white-space: nowrap;
@@ -189,9 +190,9 @@
     border-color: var(--dark);
   }
   .btn-general.active {
-    background: #fce7f3;
-    color: #be185d;
-    border-color: var(--pink);
+    background: white;
+    color: var(--dark);
+    border-color: var(--dark);
   }
   .btn-promo {
     background: white;
@@ -278,14 +279,13 @@
     border: 1px solid var(--border);
   }
   .category h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--dark);
     margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-style: italic;
   }
   .category-divider {
     height: 3px;
@@ -516,7 +516,6 @@
     <h1>מחירון ABI 2026</h1>
     <p class="subtitle">מוצרי טיפוח מקצועיים לציפורניים</p>
     <div class="gold-line">מחירון צרכן רשמי</div>
-    <div><span class="update-date" id="updateDate">עודכן: 18.04.2026</span></div>
   </header>
 
   <!-- Controls -->
@@ -530,18 +529,18 @@
       <button class="btn btn-print" onclick="window.print()">🖨️ <span class="print-text">הדפס</span></button>
     </div>
     <div class="controls-row2">
-      <button class="btn btn-general active" id="btnGeneral">📋 מחירון כללי</button>
-      <button class="btn btn-promo" id="btnPromo">🎉 מבצעים עדכניים</button>
+      <button class="btn btn-general active" id="btnGeneral">מחירון כללי</button>
+      <button class="btn btn-promo" id="btnPromo">מבצעים עדכניים</button>
     </div>
   </div>
 
   <div class="tabs no-print">
     <button class="tab active" data-cat="all">הכל</button>
-    <button class="tab" data-cat="gello">🌸 ג'לו פרופשנל</button>
-    <button class="tab" data-cat="addict">✨ אדיקט</button>
-    <button class="tab" data-cat="layla">💎 לילה מילאנו</button>
-    <button class="tab" data-cat="electric">⚡ מכשירים חשמליים</button>
-    <button class="tab" data-cat="tools">🛠️ עזרים ושונות</button>
+    <button class="tab" data-cat="gello">Gello Pro</button>
+    <button class="tab" data-cat="addict">Addict</button>
+    <button class="tab" data-cat="layla">Lila Milano</button>
+    <button class="tab" data-cat="electric">מכשירים חשמליים</button>
+    <button class="tab" data-cat="tools">עזרים ושונות</button>
   </div>
 
   <div class="promo-banner">
@@ -569,11 +568,17 @@
   const SHEET_NAME = 'מחירון 2026';
 
   const CATEGORY_ICONS = {
-    "ג'לו פרופשנל":    '🌸',
-    'אדיקט':            '✨',
-    'לילה מילאנו':      '💎',
-    'מכשירים חשמליים': '⚡',
-    'עזרים ושונות':     '🛠️'
+    "ג'לו פרופשנל":    '',
+    'אדיקט':            '',
+    'לילה מילאנו':      '',
+    'מכשירים חשמליים': '',
+    'עזרים ושונות':     ''
+  };
+
+  const BRAND_NAMES = {
+    "ג'לו פרופשנל": 'Gello Professional',
+    'אדיקט':         'Addict',
+    'לילה מילאנו':   'Lila Milano',
   };
   const CATEGORY_IDS = {
     "ג'לו פרופשנל":    'gello',
@@ -838,7 +843,8 @@
       const section = document.createElement('section');
       section.className = 'category';
       section.dataset.cat = cat.id;
-      section.innerHTML = `<h2>${cat.icon} ${cat.name}</h2><div class="category-divider"></div>`;
+      const displayName = BRAND_NAMES[cat.name] || cat.name;
+      section.innerHTML = `<h2>${displayName}</h2><div class="category-divider"></div>`;
 
       cat.groups.forEach(group => {
         if (group.name) {
@@ -877,11 +883,6 @@
       await loadFromSheet();
       renderCategories();
       applyVatMode();
-      // Update timestamp to now
-      const now = new Date();
-      const pad = n => String(n).padStart(2, '0');
-      document.getElementById('updateDate').textContent =
-        `עודכן: ${pad(now.getDate())}.${pad(now.getMonth()+1)}.${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
     } catch (err) {
       console.error(err);
       loadingContainer.innerHTML = `
