@@ -945,10 +945,45 @@
   // Search
   document.getElementById('search').addEventListener('input', (e) => {
     const q = e.target.value.trim().toLowerCase();
-    document.querySelectorAll('.product').forEach(p => {
-      const match = !q || p.dataset.name.toLowerCase().includes(q);
-      p.classList.toggle('hidden', !match);
-    });
+
+    if (q) {
+      // עבור ל"הכל" אוטומטית
+      tabs.forEach(t => t.classList.remove('active'));
+      document.querySelector('.tab[data-cat="all"]').classList.add('active');
+      document.querySelectorAll('.category').forEach(c => c.classList.remove('hidden'));
+
+      // פתח את כל האקורדיונים
+      document.querySelectorAll('.group-body').forEach(b => b.classList.add('open'));
+      document.querySelectorAll('.category h3').forEach(h => h.classList.add('open'));
+
+      // סנן מוצרים לפי שם
+      document.querySelectorAll('.product').forEach(p => {
+        const match = p.dataset.name.toLowerCase().includes(q);
+        p.classList.toggle('hidden', !match);
+      });
+
+      // הסתר קטגוריות ריקות
+      document.querySelectorAll('.category').forEach(cat => {
+        const hasVisible = cat.querySelector('.product:not(.hidden)');
+        cat.classList.toggle('hidden', !hasVisible);
+      });
+
+      // גלול למעלה
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } else {
+      // נקה חיפוש – החזר מצב רגיל
+      document.querySelectorAll('.product').forEach(p => p.classList.remove('hidden'));
+      document.querySelectorAll('.group-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.category h3').forEach(h => h.classList.remove('open'));
+
+      // החזר פילטר טאב פעיל
+      const activeTab = document.querySelector('.tab.active');
+      const cat = activeTab ? activeTab.dataset.cat : 'all';
+      document.querySelectorAll('.category').forEach(c => {
+        c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat);
+      });
+    }
   });
 </script>
 
