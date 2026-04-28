@@ -968,8 +968,11 @@
         cat.classList.toggle('hidden', !hasVisible);
       });
 
-      // גלול למעלה
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // גלול לתוצאות (כולל תמיכה במקלדת מובייל)
+      setTimeout(() => {
+        const container = document.getElementById('categoriesContainer');
+        if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
 
     } else {
       // נקה חיפוש – החזר מצב רגיל
