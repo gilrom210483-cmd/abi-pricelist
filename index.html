@@ -855,12 +855,12 @@
 
     card.innerHTML = imgUrl ? `
       <div class="product-inner">
-        ${imgHtml}
         <div class="product-content">
           <div class="product-name">${p.name}</div>
           ${priceHtml}
           ${badges.length ? '<div class="badges">' + badges.join('') + '</div>' : ''}
         </div>
+        ${imgHtml}
       </div>
     ` : `
       <div class="product-name">${p.name}</div>
