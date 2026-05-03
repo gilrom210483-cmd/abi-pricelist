@@ -822,19 +822,24 @@
     }
   ];
 
-  // מפת תמונות לפי שם מוצר
+  // מפת תמונות לפי שם מוצר (שמות מדויקים כמו בגיליון)
   const PRODUCT_IMAGES = {
     // ג'לו פרופשנל — בייסים וטופים
     'פריימר':                              'https://drive.google.com/thumbnail?id=1hbM5bbAeMMi6NnibAYYtHC1hReDqtcgd&sz=w300',
     'קאבר בייס — בקבוק':                  'https://drive.google.com/thumbnail?id=1T1KBKMpGKTR7Ev5bmdEI_vNhpx-vLriF&sz=w300',
     'קאבר בייס — צנצנת':                  'https://drive.google.com/thumbnail?id=1Ri7FSUz_bMbQfEVfGW4PgzR4KrNgW6Wt&sz=w300',
+    // ג'לו פרופשנל — צבעים
+    'צבעים':                              'https://drive.google.com/thumbnail?id=1Rolbz1bUuvFHhpV-MO7ILa0D-5BKqIxS&sz=w300',
+    'צבעים — מיניז':                      'https://drive.google.com/thumbnail?id=1Rolbz1bUuvFHhpV-MO7ILa0D-5BKqIxS&sz=w300',
+    "לק רגיל תואם ג'ל":                  'https://drive.google.com/thumbnail?id=1--wApFALzx7W5MRjkxKOhs-yo18uw_fY&sz=w300',
     // ג'לו פרופשנל — חומרי בניית ציפורניים
     "בילדר בייס (ג'ל בניה בבקבוק)":      'https://drive.google.com/thumbnail?id=1Fm5OvbxJeLPy3Yp4wmOCsZQVqmCYfC-W&sz=w300',
+    "ג'ל בניה — 15 גרם":                  'https://drive.google.com/thumbnail?id=11JQ44i-lJWLdOI7xvJJZz29co4kUNviD&sz=w300',
+    "ג'ל בניה — 30 גרם":                  'https://drive.google.com/thumbnail?id=11JQ44i-lJWLdOI7xvJJZz29co4kUNviD&sz=w300',
+    "ג'ל בניה — 50 גרם":                  'https://drive.google.com/thumbnail?id=11JQ44i-lJWLdOI7xvJJZz29co4kUNviD&sz=w300',
     "פוליג'ל — 30 גרם":                   'https://drive.google.com/thumbnail?id=1ifhTqoBgvFVz5Cv1LGFjtKi_r7jjwr4X&sz=w300',
     "פוליג'ל — 60 גרם":                   'https://drive.google.com/thumbnail?id=1ifhTqoBgvFVz5Cv1LGFjtKi_r7jjwr4X&sz=w300',
     "פוליג'ל ללא נטרול בצנצנת":           'https://drive.google.com/thumbnail?id=1ifhTqoBgvFVz5Cv1LGFjtKi_r7jjwr4X&sz=w300',
-    // ג'לו פרופשנל — צבעים
-    "לק רגיל תואם ג'ל":                   'https://drive.google.com/thumbnail?id=1--wApFALzx7W5MRjkxKOhs-yo18uw_fY&sz=w300',
     // אדיקט — בייסים וטופים
     'אולטרבונד':                           'https://drive.google.com/thumbnail?id=1QTeb7aqZ0fRKS937ekz_hkTZvmk6L9C2&sz=w300',
     'קולור בייס — בקבוק':                 'https://drive.google.com/thumbnail?id=19kTE99P4PkoOyDVwXwfzaaufaKnlZ2WY&sz=w300',
@@ -846,15 +851,28 @@
     "פוליג'ל טיובה — 30 גרם":             'https://drive.google.com/thumbnail?id=1NNDkphAqeI2mUe_3XE_0fm1eWEsIKQKx&sz=w300',
     "פוליג'ל טיובה — 60 גרם":             'https://drive.google.com/thumbnail?id=1NNDkphAqeI2mUe_3XE_0fm1eWEsIKQKx&sz=w300',
     // מכשירים חשמליים
-    'שואב שולחני בלאק הול':               'https://drive.google.com/thumbnail?id=1IOEYSbbOEpr90Gnr26wKUAxJK4cc8t0l&sz=w300',
-    'מכונת שיוף קוברה':                   'https://drive.google.com/thumbnail?id=1EkoA-dvWBZmLe97mR2wXki7LlTFmZT7b&sz=w300',
-    "מכונת שיוף נינג'ה":                  'https://drive.google.com/thumbnail?id=1EkoA-dvWBZmLe97mR2wXki7LlTFmZT7b&sz=w300',
+    'סאן וורקינג סטיישן':                 'https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w300',
     'מנורה ורודה לילה מילאנו':            'https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w300',
     'מנורת איגלו':                         'https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w300',
     'מנורת סנואו-וויט חשמלי':             'https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w300',
     'מנורת סנואו-וויט נטענת':             'https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w300',
-    'תחת עבודה אדיקט מבית סאן':           'https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w300',
+    'מנורת פנס עם חיישן ומעמד':           'https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w300',
+    'מכונת שיוף קוברה':                   'https://drive.google.com/thumbnail?id=1EkoA-dvWBZmLe97mR2wXki7LlTFmZT7b&sz=w300',
+    "מכונת שיוף נינג'ה":                  'https://drive.google.com/thumbnail?id=1EkoA-dvWBZmLe97mR2wXki7LlTFmZT7b&sz=w300',
+    'שואב שולחני בלאק הול':               'https://drive.google.com/thumbnail?id=1IOEYSbbOEpr90Gnr26wKUAxJK4cc8t0l&sz=w300',
   };
+
+  // התאמה חכמה — מתעלמת מקווים, רווחים, אותיות גדולות/קטנות
+  function normalize(s) {
+    return s.replace(/[—\-–״"']/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+  }
+  const _normalizedImages = {};
+  for (const [k, v] of Object.entries(PRODUCT_IMAGES)) {
+    _normalizedImages[normalize(k)] = v;
+  }
+  function findImage(name) {
+    return PRODUCT_IMAGES[name] || _normalizedImages[normalize(name)] || null;
+  }
 
   // Build a single product card
   function buildCard(p) {
@@ -879,7 +897,7 @@
     if (p.promo) badges.push(`<span class="badge badge-promo">🔥 ${p.promo}</span>`);
     if (p.gift) badges.push(`<span class="badge badge-gift">🎁 ${p.gift}</span>`);
 
-    const imgUrl = PRODUCT_IMAGES[p.name];
+    const imgUrl = findImage(p.name);
     const imgHtml = imgUrl ? `<img class="product-img" src="${imgUrl}" alt="${p.name}" loading="lazy">` : '';
 
     card.innerHTML = imgUrl ? `
